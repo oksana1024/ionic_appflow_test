@@ -1,0 +1,84 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title> Feedback and Progress </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size-md="6" offset-md="3">
+        <form [formGroup]="feedbackForm">
+
+          <!-- kidName input with Valaditation-->
+          <ion-item>
+            <ion-label position="floating"> Kid Name: </ion-label>
+            <ion-input type="text" inputmode="text" required formControlName="kidName" class="inputBox"> </ion-input>
+          </ion-item>
+
+          <div *ngIf="kidName.invalid && (kidName.touched || kidName.dirty)">
+            <div *ngIf="kidName.errors.required">
+              <ion-text color="danger">
+                <p class="form-error"> Kid name is required. </p>
+              </ion-text>
+            </div>
+
+            <div *ngIf="kidName.errors.pattern">
+              <ion-text color="danger">
+                <p class="form-error"> Kid name should include only letters. </p>
+              </ion-text>
+            </div>
+          </div>
+
+          <!-- Progress Note input with Valaditation-->
+          <ion-item>
+            <ion-label position="floating"> Progress Note: </ion-label>
+            <ion-input type="text" inputmode="text" required formControlName="progNote" class="inputBox"> </ion-input>
+          </ion-item>
+
+          <div *ngIf="progNote.invalid && (progNote.touched || progNote.dirty)">
+            <div *ngIf="progNote.errors.required">
+              <ion-text color="danger">
+                <p class="form-error"> Progress note is required. </p>
+              </ion-text>
+            </div>
+            <div *ngIf="progNote.errors.pattern">
+              <ion-text color="danger">
+                <p class="form-error"> Progress note is required. </p>
+              </ion-text>
+            </div>
+          </div>
+
+          <!-- Feedback Note input with Valaditation-->
+          <ion-item>
+            <ion-label position="floating"> Feedback Note: </ion-label>
+            <ion-input type="text" inputmode="text" required formControlName="feedbackNote" class="inputBox"> </ion-input>
+          </ion-item>
+
+          <div *ngIf="feedbackNote.invalid && (feedbackNote.touched || feedbackNote.dirty)">
+            <div *ngIf="feedbackNote.errors.required">
+              <ion-text color="danger">
+                <p class="form-error"> Feedback Note is required. </p>
+              </ion-text>
+            </div>
+            <div *ngIf="feedbackNote.errors.pattern">
+              <ion-text color="danger">
+                <p class="form-error"> Feedback Note is required. </p>
+              </ion-text>
+            </div>
+          </div>
+
+          <!-- Submit btn-->
+          <ion-button expand="block" color="primary" [disabled]="feedbackForm.invalid">
+            <ion-icon slot="start" name="save"> </ion-icon> Submit
+          </ion-button>
+        </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+

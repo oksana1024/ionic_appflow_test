@@ -1,0 +1,42 @@
+* {
+    font-family: Arial, sans-serif;
+}
+
+.form-error {
+    margin-left: 2em;
+}
+
+ion-button {
+    margin: 2em;
+}
+
+#noShowForm {
+    width: 80%;
+    margin: 2em auto;
+    ion-label {
+        font-size: 1.5em;
+        font-weight: bolder;
+    }
+    .inputBox {
+        margin: 1em;
+    }
+    .ibFont {
+        opacity: 0.75;
+    }
+    .hilite {
+        background-color: gainsboro;
+        margin-left: 3em;
+    }
+    .ioCalendar {
+        margin: 0 1em;
+    }
+    .ng-autocomplete {
+        width: auto;
+    }
+    .childName {
+        margin-left: 0.5em;
+        font-size: 1.25em;
+    }
+}
+
+

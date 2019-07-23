@@ -1,0 +1,101 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Absence Form
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+//test
+<ion-content>
+  <form [formGroup]="noShowForm" id="noShowForm">
+
+    <div class="reactive-form">
+      <ion-label position="stacked" class="childName">Child's name:</ion-label>
+      <form autocomplete="on" novalidate [formGroup]="noShowForm" (ngSubmit)="submitReactiveForm($event)" class="inputBox kidsName">
+        <div class="container">
+          <div class="ng-autocomplete">
+            <ng-autocomplete #ngAutoCompleteStatic [data]="childrenList" formControlName="childName" 
+            [initialValue]="" [placeHolder]="placeholder" [searchKeyword]="keyword" 
+            historyIdentifier="childrenListList" [historyHeading]="historyHeading" historyListMaxNumber="3" 
+            notFoundText="Not found" [itemTemplate]="itemTemplateStatic" [notFoundTemplate]="notFoundTemplate">
+            </ng-autocomplete>
+  
+            <ng-template #itemTemplateStatic let-item>
+              <a [innerHTML]="item"></a>
+            </ng-template>
+  
+            <ng-template #notFoundTemplate let-notFound>
+              <div [innerHTML]="notFound"></div>
+            </ng-template>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div *ngIf="childName.invalid && (childName.touched || childName.dirty)">
+      <div *ngIf="childName.errors.required">
+        <ion-text color="danger"><p class="form-error">Child's name is missing.</p></ion-text>  
+      </div>
+    </div>
+
+    <ion-list>
+      <ion-item>
+        <ion-label position="stacked">Reason for absence:</ion-label>
+        <ion-select placeholder="Click to select reason" formControlName="reason" class="inputBox">
+            <ion-select-option *ngFor="let reason of reasonList" [value]="reason" required>
+                {{reason}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+
+    <div *ngIf="reason.invalid && (reason.touched || reason.dirty)">
+      <div *ngIf="reason.errors.required">
+        <ion-text color="danger"><p class="form-error">Reason for absence is missing.</p></ion-text>  
+      </div>
+    </div>
+  
+    <ion-item>
+      <ion-label position="stacked">From:</ion-label>
+      <ion-input placeholder="Select date" readonly formControlName="dateFrom" [liIonic4Datepicker]="datePickerObj" class="inputBox hilite"
+      (ionchange)="myFunction()"><ion-icon name="calendar" class="ioCalendar" required></ion-icon>
+      </ion-input>
+    </ion-item>
+  
+    <div *ngIf="noShowForm.errors?.dateError && (dateFrom.touched || dateFrom.dirty)">
+      <ion-text color="danger"><p class="form-error">The To: date is before the From: date.</p></ion-text>  
+    </div> 
+
+    <ion-item>
+      <ion-label position="stacked">To:</ion-label>
+      <ion-input placeholder="Select date" readonly formControlName="dateTo" [liIonic4Datepicker]="datePickerObj" class="inputBox hilite"
+        (ionchange)="myFunction()"><ion-icon name="calendar" class="ioCalendar" required></ion-icon>
+      </ion-input>
+    </ion-item>
+
+    <div *ngIf="noShowForm.errors?.dateError && (dateTo.touched || dateTo.dirty)">
+      <ion-text color="danger"><p class="form-error">The To: date is before the From: date.</p></ion-text>  
+    </div> 
+
+    <ion-item>
+      <ion-label position="stacked">Notes:</ion-label>
+      <ion-textarea placeholder="Enter more information here..." type="text" inputmode="text" 
+      auto-grow="true" color="dark" formControlName="notes" wrap="soft" class="inputBox ibFont"></ion-textarea>
+    </ion-item>
+
+    
+    <ion-button type="submit" expand="block" color="medium" 
+    [disabled]="noShowForm.invalid">SAVE</ion-button> 
+
+    <p>
+      Value: {{ noShowForm.value | json }}
+      <br>
+      dateTo status: {{ dateTo.status }}
+      Form status: {{ noShowForm.status }}
+    </p>
+
+  </form>
+
+</ion-content>
